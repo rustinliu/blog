@@ -1,0 +1,487 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rustin Liu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="​ 泛型在像 C#和 Java 这样的语言中，可以使用泛型来创建可重用的组件，一个组件可以支持多种类型的数据。 这样用户就可以以自己的数据类型来使用组件。 123456&#x2F;&#x2F; T : 泛型变量 | 类型变量function identity&lt;T&gt;(arg: T): T &amp;#123;    return arg;&amp;#125;identity(123);identity(&amp;#x27;123&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TypeScript学习总结之泛型">
+<meta property="og:url" content="http://rustin.top/2022/01/06/TypeScript%E7%AC%94%E8%AE%B05/index.html">
+<meta property="og:site_name" content="Rustin&#39;s Blog">
+<meta property="og:description" content="​ 泛型在像 C#和 Java 这样的语言中，可以使用泛型来创建可重用的组件，一个组件可以支持多种类型的数据。 这样用户就可以以自己的数据类型来使用组件。 123456&#x2F;&#x2F; T : 泛型变量 | 类型变量function identity&lt;T&gt;(arg: T): T &amp;#123;    return arg;&amp;#125;identity(123);identity(&amp;#x27;123&amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://rustin.top/img/notedefault.jpg">
+<meta property="article:published_time" content="2022-01-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-03-17T14:43:41.201Z">
+<meta property="article:author" content="Rustin Liu">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="TypeScript">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://rustin.top/img/notedefault.jpg">
+  
+  
+  <title>TypeScript学习总结之泛型 - Rustin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"rustin.top","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rustin&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="TypeScript学习总结之泛型">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-06 00:00" pubdate>
+        2022年1月6日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      38 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">TypeScript学习总结之泛型</h1>
+            
+            <div class="markdown-body">
+              <p>​</p>
+<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p>在像 C#和 Java 这样的语言中，可以使用泛型来创建可重用的组件，一个组件可以支持多种类型的数据。 这样用户就可以以自己的数据类型来使用组件。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">// T : 泛型变量 | 类型变量</span><br><span class="hljs-keyword">function</span> identity&lt;T&gt;(<span class="hljs-attr">arg</span>: T): T &#123;<br>    <span class="hljs-keyword">return</span> arg;<br>&#125;<br><span class="hljs-title function_">identity</span>(<span class="hljs-number">123</span>);<br><span class="hljs-title function_">identity</span>(<span class="hljs-string">&#x27;123&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>代码中 <strong>T 代表 「Type」</strong>，在定义泛型时通常用作第一个类型变量名称。但实际上 T 可以用任何有效名称代替。</p>
+<p>由于我们操作的是数组，所以.length 属性是应该存在的。 我们可以像创建其它数组一样创建这个数组：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">function</span> loggingIdentity&lt;T&gt;(<span class="hljs-attr">arg</span>: T[]): T[] &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arg.<span class="hljs-property">length</span>); <span class="hljs-comment">// Array has a .length, so no more error</span><br>    <span class="hljs-keyword">return</span> arg;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>其实并不是只能定义一个类型变量，我们可以引入希望定义的任何数量的类型变量。比如我们引入一个新的类型变量 <code>U</code>，用于扩展我们定义的 <code>identity</code> 函数：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">function</span> identity&lt;T, U&gt;(<span class="hljs-attr">value</span>: T, <span class="hljs-attr">message</span>: U): T &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(message);<br>    <span class="hljs-keyword">return</span> value;<br>&#125;<br><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">identity</span>(<span class="hljs-number">666</span>, <span class="hljs-string">&#x27;jack is cool!&#x27;</span>));<br></code></pre></td></tr></table></figure>
+
+<h2 id="泛型类型-amp-amp-泛型接口"><a href="#泛型类型-amp-amp-泛型接口" class="headerlink" title="泛型类型 &amp;&amp; 泛型接口"></a>泛型类型 &amp;&amp; 泛型接口</h2><p>泛型类型不同的注解方式:</p>
+<ol>
+<li>函数泛型的注解方式</li>
+<li>对象字面量的方式来定义泛型类型</li>
+<li>泛型接口的定义方式</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">//  泛型类型的不同方式</span><br><span class="hljs-keyword">function</span> identity&lt;T&gt;(<span class="hljs-attr">arg</span>: T): T &#123;<br>    <span class="hljs-keyword">return</span> arg;<br>&#125;<br><br><span class="hljs-comment">// 1. 函数泛型的注解方式：</span><br><span class="hljs-keyword">let</span> <span class="hljs-attr">a</span>: &lt;T&gt;<span class="hljs-function">(<span class="hljs-params">arg: T</span>) =&gt;</span> T = identity;<br><br><span class="hljs-comment">// 2. 对象字面量的方式来定义泛型类型</span><br><span class="hljs-keyword">let</span> <span class="hljs-attr">b</span>: &#123; &lt;T&gt;(<span class="hljs-attr">arg</span>: T): T &#125; = identity;<br><br><span class="hljs-comment">// 3. 泛型接口的定义方式</span><br><span class="hljs-keyword">interface</span> <span class="hljs-title class_">IdentityInterface</span> &#123;<br>    &lt;T&gt;(<span class="hljs-attr">arg</span>: T): T;<br>&#125;<br><span class="hljs-keyword">let</span> <span class="hljs-attr">c</span>: <span class="hljs-title class_">IdentityInterface</span> = identity;<br></code></pre></td></tr></table></figure>
+
+<h2 id="泛型类-amp-泛型约束"><a href="#泛型类-amp-泛型约束" class="headerlink" title="泛型类 &amp; 泛型约束"></a>泛型类 &amp; 泛型约束</h2><h3 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h3><p>泛型类看上去与泛型接口差不多，我们只需要在类名后面，使用 &lt;T, …&gt; 的语法定义任意多个类型变量，具体示例如下：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">// 泛型类</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MinClass</span>&lt;T&gt; &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-attr">list</span>: T[] = [];<br>    <span class="hljs-title function_">add</span>(<span class="hljs-params">num: T</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">list</span>.<span class="hljs-title function_">push</span>(num);<br>    &#125;<br>    <span class="hljs-title function_">min</span>(): T &#123;<br>        <span class="hljs-keyword">let</span> minNum = <span class="hljs-variable language_">this</span>.<span class="hljs-property">list</span>[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-variable language_">this</span>.<span class="hljs-property">list</span>.<span class="hljs-property">length</span>; i++) &#123;<br>            <span class="hljs-keyword">if</span> (minNum &gt; <span class="hljs-variable language_">this</span>.<span class="hljs-property">list</span>[i]) &#123;<br>                minNum = <span class="hljs-variable language_">this</span>.<span class="hljs-property">list</span>[i];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> minNum;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我们在什么时候需要使用泛型呢？通常在决定是否使用泛型时，我们有以下两个参考标准：</p>
+<ul>
+<li>当你的函数、接口或类将处理多种数据类型时；</li>
+<li>当函数、接口或类在多个地方使用该数据类型时。</li>
+</ul>
+<h3 id="泛型约束"><a href="#泛型约束" class="headerlink" title="泛型约束"></a>泛型约束</h3><p><strong>有时我们可能希望限制每个类型变量接受的类型数量，这就是泛型约束的作用。</strong></p>
+<p>以官方文档例子为例：</p>
+<p>我们需要去定义一个接口来描述约束条件。</p>
+<p>创建一个包含 .length 属性的接口，使用这个接口和 extends 关键字来实现约束：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">LengthInterface</span> &#123;<br>    <span class="hljs-attr">length</span>: <span class="hljs-built_in">number</span>;<br>&#125;<br><br><span class="hljs-keyword">function</span> loggingIdentity&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-title class_">LengthInterface</span>&gt;(<span class="hljs-attr">arg</span>: T): T &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arg.<span class="hljs-property">length</span>);<br>    <span class="hljs-keyword">return</span> arg;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>其中,<strong>泛型约束用的是： extends 继承接口的方式（不一定非要是接口）</strong> 、<code>T extends LengthInterface </code>用于告诉编译器，我们支持已经实现 Length 接口的任何类型</p>
+<p>另外， 泛型约束并不一定用接口方式， 比如 我们可以把以上代码 接口 换成 类型别名 ,<br>如下例子：<br>&#x2F;&#x2F; 以类型别名的方式依然可以</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">LengthType</span> = <span class="hljs-built_in">string</span>;<br><br><span class="hljs-keyword">function</span> loggingIdentity&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-title class_">LengthType</span>&gt;(<span class="hljs-attr">arg</span>: T): T &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arg.<span class="hljs-property">length</span>);<br>    <span class="hljs-keyword">return</span> arg;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="keyof-操作符"><a href="#keyof-操作符" class="headerlink" title="keyof 操作符"></a>keyof 操作符</h4><p><strong>keyof 操作符可以用于获取某种类型的所有键，其返回类型是联合类型。</strong></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">// keyof 操作符</span><br><br><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Person</span> &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;<br>    <span class="hljs-attr">age</span>: <span class="hljs-built_in">number</span>;<br>    <span class="hljs-attr">location</span>: <span class="hljs-built_in">string</span>;<br>&#125;<br><br><span class="hljs-keyword">type</span> <span class="hljs-variable constant_">K1</span> = keyof <span class="hljs-title class_">Person</span>; <span class="hljs-comment">// &quot;name&quot; | &quot;age&quot; | &quot;location&quot;</span><br><span class="hljs-keyword">type</span> <span class="hljs-variable constant_">K2</span> = keyof <span class="hljs-title class_">Person</span>[]; <span class="hljs-comment">// number | &quot;length&quot; | &quot;push&quot; | &quot;concat&quot; | ...</span><br><span class="hljs-keyword">type</span> <span class="hljs-variable constant_">K3</span> = keyof &#123; [<span class="hljs-attr">x</span>: <span class="hljs-built_in">string</span>]: <span class="hljs-title class_">Person</span> &#125;; <span class="hljs-comment">// string | number</span><br></code></pre></td></tr></table></figure>
+
+<p>可以看出， k1,k2,k3 其实是键名</p>
+<h4 id="在泛型约束中使用类型参数"><a href="#在泛型约束中使用类型参数" class="headerlink" title="在泛型约束中使用类型参数"></a>在泛型约束中使用类型参数</h4><p>当我们理解了 keyof 操作符时， 看下面代码就很好理解了</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">function</span> getProperty&lt;T, K <span class="hljs-keyword">extends</span> keyof T&gt;(<span class="hljs-attr">obj</span>: T, <span class="hljs-attr">key</span>: K) &#123;<br>    <span class="hljs-keyword">return</span> obj[key];<br>&#125;<br><br><span class="hljs-keyword">let</span> x = &#123; <span class="hljs-attr">a</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">b</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">c</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">d</span>: <span class="hljs-number">4</span> &#125;;<br><br><span class="hljs-title function_">getProperty</span>(x, <span class="hljs-string">&#x27;a&#x27;</span>); <span class="hljs-comment">// okay</span><br><span class="hljs-title function_">getProperty</span>(x, <span class="hljs-string">&#x27;m&#x27;</span>); <span class="hljs-comment">// error: Argument of type &#x27;m&#x27; isn&#x27;t assignable to &#x27;a&#x27; | &#x27;b&#x27; | &#x27;c&#x27; | &#x27;d&#x27;.</span><br></code></pre></td></tr></table></figure>
+
+<p>**而 K 就是指 ‘a’ , ‘b’ , ‘c’ , ‘d’ **</p>
+<p>很明显通过使用泛型约束，在编译阶段我们就可以提前发现错误，大大提高了程序的健壮性和稳定性。</p>
+<h3 id="多重泛型约束-amp-交叉类型"><a href="#多重泛型约束-amp-交叉类型" class="headerlink" title="多重泛型约束 &amp; 交叉类型"></a>多重泛型约束 &amp; 交叉类型</h3><p>交叉类型是将多个类型合并为一个类型。 这让我们可以把现有的多种类型叠加到一起成为一种类型，它包含了所需的所有类型的特性。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> extend&lt;T, U&gt;(<span class="hljs-attr">first</span>: T, <span class="hljs-attr">second</span>: U): T &amp; U &#123;<br>    <span class="hljs-keyword">let</span> result = &lt;T &amp; U&gt;&#123;&#125;; // 断言， 表示 result 包含 T  U 俩种类型<br>    for (let id in first) &#123;<br>        (&lt;any&gt;result)[id] = (&lt;any&gt;first)[id]; // 将 first 中所有属性 给 result<br>    &#125;<br>    for (let id in second) &#123;<br>        if (!result.hasOwnProperty(id)) &#123;<br>            (&lt;any&gt;result)[id] = (&lt;any&gt;second)[id];<br>            // 将 second 中所有属性 给 result, 前提是result 没有该属性时<br>        &#125;<br>    &#125;<br>    return result; // 返回的 result 就有  first 和 second 的所有属性<br>&#125;<br><br>class Person &#123;<br>    constructor(public name: string) &#123;&#125;<br>&#125;<br>interface Loggable &#123;<br>    log(): void;<br>&#125;<br>class ConsoleLogger implements Loggable &#123;<br>    log() &#123;<br>        // ...<br>    &#125;<br>&#125;<br>var jim = extend(new Person(&#x27;Jim&#x27;), new ConsoleLogger());<br>var n = jim.name;<br>jim.log();<br></code></pre></td></tr></table></figure>
+
+<p>再举个简单例子：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Sentence</span> &#123;<br>    <span class="hljs-attr">content</span>: <span class="hljs-built_in">string</span>;<br>    <span class="hljs-attr">title</span>: <span class="hljs-built_in">string</span>;<br>&#125;<br><br><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Music</span> &#123;<br>    <span class="hljs-attr">url</span>: <span class="hljs-built_in">string</span>;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span>&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Sentence</span> &amp; <span class="hljs-title class_">Music</span>&gt; &#123;<br>    <span class="hljs-attr">props</span>: T;<br>    <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">public</span> arg: T</span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">props</span> = arg;<br>    &#125;<br><br>    <span class="hljs-title function_">info</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> &#123;<br>            <span class="hljs-comment">// 这里可以 this.props.xxx 的原因是因为 arg 符合 T类型， 而T 又继承了上面俩个接口的属性。</span><br>            <span class="hljs-attr">content</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">content</span>,<br>            <span class="hljs-attr">title</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">title</span>,<br>            <span class="hljs-attr">url</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">props</span>.<span class="hljs-property">url</span>,<br>        &#125;;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="泛型中的类类型"><a href="#泛型中的类类型" class="headerlink" title="泛型中的类类型"></a>泛型中的类类型</h3><p><strong>泛型中的类类型 目的是 约束或者更好的推论</strong></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">class</span> <span class="hljs-title class_">BeeKeeper</span> &#123;<br>    <span class="hljs-attr">hasMask</span>: <span class="hljs-built_in">boolean</span>;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">ZooKeeper</span> &#123;<br>    <span class="hljs-attr">nametag</span>: <span class="hljs-built_in">string</span>;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Animal</span> &#123;<br>    <span class="hljs-attr">numLegs</span>: <span class="hljs-built_in">number</span>;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Bee</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Animal</span> &#123;<br>    <span class="hljs-attr">keeper</span>: <span class="hljs-title class_">BeeKeeper</span>;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Lion</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Animal</span> &#123;<br>    <span class="hljs-attr">keeper</span>: <span class="hljs-title class_">ZooKeeper</span>;<br>&#125;<br><br><span class="hljs-keyword">function</span> createInstance&lt;A <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Animal</span>&gt;(<span class="hljs-attr">c</span>: <span class="hljs-keyword">new</span> () =&gt; A): A &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title function_">c</span>();<br>&#125;<br><br><span class="hljs-title function_">createInstance</span>(<span class="hljs-title class_">Lion</span>).<span class="hljs-property">keeper</span>.<span class="hljs-property">nametag</span>; <span class="hljs-comment">// typechecks!</span><br><span class="hljs-title function_">createInstance</span>(<span class="hljs-title class_">Bee</span>).<span class="hljs-property">keeper</span>.<span class="hljs-property">hasMask</span>; <span class="hljs-comment">// typechecks!</span><br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/TypeScript/">TypeScript</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/03/13/%E6%89%8B%E5%86%99%E8%AE%A2%E9%98%85%E4%B8%8E%E5%8F%91%E5%B8%83%E6%A8%A1%E5%BC%8F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">手写订阅与发布模式</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/05/TypeScript%E7%AC%94%E8%AE%B04/">
+                        <span class="hidden-mobile">TypeScript学习总结之接口</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

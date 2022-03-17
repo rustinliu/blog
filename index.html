@@ -1,0 +1,789 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rustin Liu">
+  <meta name="keywords" content="">
+  
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Rustin&#39;s Blog">
+<meta property="og:url" content="http://rustin.top/index.html">
+<meta property="og:site_name" content="Rustin&#39;s Blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Rustin Liu">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>Rustin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"rustin.top","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rustin&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://tuapi.eees.cc/api.php?category=biying&type=302') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Carpe Diem">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/03/17/http%E5%8D%8F%E8%AE%AE/" target="_self">
+          <img src="/img/notedefault.jpg" srcset="/img/loading.gif" lazyload alt="HTTP各协议版本的区别">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/17/http%E5%8D%8F%E8%AE%AE/" target="_self">
+          HTTP各协议版本的区别
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/17/http%E5%8D%8F%E8%AE%AE/" target="_self">
+          
+          一、HTTP1.0HTTP协议的第二个版本，第一个在通讯中指定版本号的 HTTP 协议版本 HTTP 1.0 浏览器与服务器只保持短暂的连接，每次请求都需要与服务器建立一个TCP连接 服务器完成请求处理后立即断开TCP连接，服务器不跟踪每个客户也不记录过去的请求 简单来讲，每次与服务器交互，都需要新开一个连接  例如，解析html文件，当发现文件中存在资源文件的时候，这时候又创建单独的链接 最终导
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-17 00:00" pubdate>
+              2022-03-17
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/http/">http</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/03/17/%E5%B1%85%E4%B8%AD%E7%AC%94%E8%AE%B0/" target="_self">
+          <img src="/img/notedefault.jpg" srcset="/img/loading.gif" lazyload alt="元素水平垂直居中的解决方法">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/17/%E5%B1%85%E4%B8%AD%E7%AC%94%E8%AE%B0/" target="_self">
+          元素水平垂直居中的解决方法
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/17/%E5%B1%85%E4%B8%AD%E7%AC%94%E8%AE%B0/" target="_self">
+          
+          一、背景居中是一个非常基础但又是非常重要的应用场景，实现居中的方法存在很多，可以将这些方法分成两个大类：  居中元素（子元素）的宽高已知 居中元素宽高未知  二、实现方式实现元素水平垂直居中的方式：  利用定位+margin:auto  利用定位+margin:负值  利用定位+transform  table 布局  flex 布局  grid 布局   利用定位+margin:auto先上代码
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-17 00:00" pubdate>
+              2022-03-17
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CSS/">CSS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/03/13/JavaScript%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%B7%B1%E6%8B%B7%E8%B4%9D%E7%9A%84%E5%87%A0%E4%B8%AA%E6%96%B9%E6%B3%95/" target="_self">
+          <img src="/img/notedefault.jpg" srcset="/img/loading.gif" lazyload alt="JavaScript中实现深拷贝的几个方法">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/13/JavaScript%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%B7%B1%E6%8B%B7%E8%B4%9D%E7%9A%84%E5%87%A0%E4%B8%AA%E6%96%B9%E6%B3%95/" target="_self">
+          JavaScript中实现深拷贝的几个方法
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/13/JavaScript%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%B7%B1%E6%8B%B7%E8%B4%9D%E7%9A%84%E5%87%A0%E4%B8%AA%E6%96%B9%E6%B3%95/" target="_self">
+          
+          序列化与反序列化代码如下： 1const b &#x3D; JSON.parse ( JSON.stringify (a ) );  优点：简单 缺点：  JSON 只有六种数据格式，所以在转化时不支持 Date、正则、undefined、函数等数据 . 不支持引用(即环状结构)  递归实现代码如下： 12345678910111213141516171819202122232425262728293031
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-13 00:00" pubdate>
+              2022-03-13
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/%E6%89%8B%E5%86%99/">手写</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/03/13/https/" target="_self">
+          <img src="/img/notedefault.jpg" srcset="/img/loading.gif" lazyload alt="关于HTTPS的一些知识点">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/13/https/" target="_self">
+          关于HTTPS的一些知识点
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/13/https/" target="_self">
+          
+          需要对密码学简单认识一下什么是对称加密、非对称加密、单向散列、消息认证码、数字签名、证书、PKI 体系 信息安全  机密性：信息是否被泄漏。使用对称加密、非对称加密来保证 完整性：信息是否被修改，使用单向散列、消息认证码、数字签名来保证 真实性：发送者是否冒名顶替的。使用消息认证码、数字签名来保证 不可否认性：做过了会不会抵赖。使用数字签名来保证  对称加密实现信息安全的机密性，那么可以使用对称加
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-13 00:00" pubdate>
+              2022-03-13
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/http/">http</a>
+            
+              <a href="/tags/https/">https</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/03/13/%E6%89%8B%E5%86%99Ajax/" target="_self">
+          <img src="/img/notedefault.jpg" srcset="/img/loading.gif" lazyload alt="手写Ajax">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/13/%E6%89%8B%E5%86%99Ajax/" target="_self">
+          手写Ajax
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/13/%E6%89%8B%E5%86%99Ajax/" target="_self">
+          
+          代码如下： 123456789101112131415const ajax &#x3D; (method, url, data, success, fail) &#x3D;&gt; &amp;#123;    var request &#x3D; new XMLHttpRequest();    request.open(method, url); &#x2F;&#x2F;这里默认用异步请求    request.onreadystatechange &#x3D;
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-13 00:00" pubdate>
+              2022-03-13
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/Ajax/">Ajax</a>
+            
+              <a href="/tags/%E6%89%8B%E5%86%99/">手写</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/03/13/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93%E7%89%88promise/" target="_self">
+          <img src="/img/notedefault.jpg" srcset="/img/loading.gif" lazyload alt="手写Promise">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/13/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93%E7%89%88promise/" target="_self">
+          手写Promise
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/13/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93%E7%89%88promise/" target="_self">
+          
+          简易 Promise 实现简易的原因是只有一次 then()，代码如下： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546class Promise2 &amp;#123;    #status &#x3D; &amp;#x27;pending&amp;#x27;;    constructor(fn) &amp;#123
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-13 00:00" pubdate>
+              2022-03-13
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/%E6%89%8B%E5%86%99/">手写</a>
+            
+              <a href="/tags/Promise/">Promise</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/03/13/%E6%89%8B%E5%86%99%E8%8A%82%E6%B5%81%E4%B8%8E%E9%98%B2%E6%8A%96/" target="_self">
+          <img src="/img/notedefault.jpg" srcset="/img/loading.gif" lazyload alt="手写节流防抖函数">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/13/%E6%89%8B%E5%86%99%E8%8A%82%E6%B5%81%E4%B8%8E%E9%98%B2%E6%8A%96/" target="_self">
+          手写节流防抖函数
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/13/%E6%89%8B%E5%86%99%E8%8A%82%E6%B5%81%E4%B8%8E%E9%98%B2%E6%8A%96/" target="_self">
+          
+          因为整体并不复杂，直接上代码理解就可以了。 节流（throttle）1234567891011121314151617181920212223242526&#x2F;&#x2F; 节流就是「技能冷却中」const throttle1 &#x3D; (fn, time) &#x3D;&gt; &amp;#123;    let flag &#x3D; false;    return (...args) &#x3D;&gt; &amp;#123;        if (fl
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-13 00:00" pubdate>
+              2022-03-13
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/%E6%89%8B%E5%86%99/">手写</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/03/13/%E6%89%8B%E5%86%99%E8%AE%A2%E9%98%85%E4%B8%8E%E5%8F%91%E5%B8%83%E6%A8%A1%E5%BC%8F/" target="_self">
+          <img src="/img/notedefault.jpg" srcset="/img/loading.gif" lazyload alt="手写订阅与发布模式">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/13/%E6%89%8B%E5%86%99%E8%AE%A2%E9%98%85%E4%B8%8E%E5%8F%91%E5%B8%83%E6%A8%A1%E5%BC%8F/" target="_self">
+          手写订阅与发布模式
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/13/%E6%89%8B%E5%86%99%E8%AE%A2%E9%98%85%E4%B8%8E%E5%8F%91%E5%B8%83%E6%A8%A1%E5%BC%8F/" target="_self">
+          
+          对象方式123456789101112131415161718192021222324252627const eventHub &#x3D; &amp;#123;    map: &amp;#123;        &#x2F;&#x2F;haspMap        &#x2F;&#x2F; click: [f1 , f2]    &amp;#125;,    on: (name, fn) &#x3D;&gt; &amp;#123;        eventHub.map[name]
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-13 00:00" pubdate>
+              2022-03-13
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/%E6%89%8B%E5%86%99/">手写</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/01/06/TypeScript%E7%AC%94%E8%AE%B05/" target="_self">
+          <img src="/img/notedefault.jpg" srcset="/img/loading.gif" lazyload alt="TypeScript学习总结之泛型">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/01/06/TypeScript%E7%AC%94%E8%AE%B05/" target="_self">
+          TypeScript学习总结之泛型
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/01/06/TypeScript%E7%AC%94%E8%AE%B05/" target="_self">
+          
+          ​ 泛型在像 C#和 Java 这样的语言中，可以使用泛型来创建可重用的组件，一个组件可以支持多种类型的数据。 这样用户就可以以自己的数据类型来使用组件。 123456&#x2F;&#x2F; T : 泛型变量 | 类型变量function identity&lt;T&gt;(arg: T): T &amp;#123;    return arg;&amp;#125;identity(123);identity(&amp;#x27;123&amp;
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-01-06 00:00" pubdate>
+              2022-01-06
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/TypeScript/">TypeScript</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/01/05/TypeScript%E7%AC%94%E8%AE%B04/" target="_self">
+          <img src="/img/notedefault.jpg" srcset="/img/loading.gif" lazyload alt="TypeScript学习总结之接口">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/01/05/TypeScript%E7%AC%94%E8%AE%B04/" target="_self">
+          TypeScript学习总结之接口
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/01/05/TypeScript%E7%AC%94%E8%AE%B04/" target="_self">
+          
+          ​ 接口 interface 在 TypeScript 学习总结之基础类型 那一章节中，我稍微学习了一下 接口 interface， 对它有了初步了解， 接下来总结的是 TS 文档接口这一章节。  函数类型以官方文档代码为例， 我分析了几种函数注解的方式： 方式一: （最常见的） 123456789interface SearchFunc &amp;#123;    (source: string, su
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-01-05 00:00" pubdate>
+              2022-01-05
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/TypeScript/">TypeScript</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#board">6</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

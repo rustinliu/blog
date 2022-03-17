@@ -1,0 +1,626 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rustin Liu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="函数的四种定义方法及组成首先，要明确一点就是函数本身也是一个对象。  具名函数  function 函数名 (形式参数1，形式参数2)&amp;#123;语句 return 返回值&amp;#125;  匿名函数  上面的具名函数去掉函数名就是匿名函数  例如 let a &#x3D; function(x,y)&amp;#123;return x+y&amp;#125;  也叫函数表达体     我们可以把匿名函数和具名函数结合起来使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 函数">
+<meta property="og:url" content="http://rustin.top/2021/10/04/JS%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:site_name" content="Rustin&#39;s Blog">
+<meta property="og:description" content="函数的四种定义方法及组成首先，要明确一点就是函数本身也是一个对象。  具名函数  function 函数名 (形式参数1，形式参数2)&amp;#123;语句 return 返回值&amp;#125;  匿名函数  上面的具名函数去掉函数名就是匿名函数  例如 let a &#x3D; function(x,y)&amp;#123;return x+y&amp;#125;  也叫函数表达体     我们可以把匿名函数和具名函数结合起来使用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://rustin.top/img/notedefault.jpg">
+<meta property="article:published_time" content="2021-10-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-03-05T14:44:26.891Z">
+<meta property="article:author" content="Rustin Liu">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://rustin.top/img/notedefault.jpg">
+  
+  
+  <title>JS 函数 - Rustin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"rustin.top","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rustin&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JS 函数">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-04 00:00" pubdate>
+        2021年10月4日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      19 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JS 函数</h1>
+            
+            <div class="markdown-body">
+              <h2 id="函数的四种定义方法及组成"><a href="#函数的四种定义方法及组成" class="headerlink" title="函数的四种定义方法及组成"></a>函数的四种定义方法及组成</h2><p>首先，要明确一点就是函数本身也是一个对象。</p>
+<ol>
+<li><p>具名函数</p>
+<p> <code>function 函数名 (形式参数1，形式参数2)&#123;语句 return 返回值&#125;</code></p>
+</li>
+<li><p>匿名函数</p>
+<ul>
+<li><p>上面的具名函数去掉函数名就是匿名函数</p>
+</li>
+<li><p>例如 <code>let a = function(x,y)&#123;return x+y&#125;</code></p>
+</li>
+<li><p>也叫函数表达体</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>我们可以把匿名函数和具名函数结合起来使用，如 <code>let a =function fn(x,y)&#123;return x+y&#125;</code> ，那么需要注意的是这时只能通过 a(x,y) 来调用函数，fn(x,y)不能调用函数，因为 fn 的作用域只在等号之后存在，在外部无法访问到 fn。</p>
+<ol start="3">
+<li><p>箭头函数</p>
+<ul>
+<li><p><code>let f1 = x =&gt; x*x</code></p>
+</li>
+<li><p><code>let f2 = (x,y) =&gt; x+y // 包含两个及以上形参时圆括号不能省</code></p>
+</li>
+<li><p><code>f3 = (x,y) =&gt; &#123;console.log(&#39;hi&#39;);return x+y&#125; // 函数体包含两句以上语句时花括号不能省</code></p>
+</li>
+<li><p><code>let f4 = (x,y) =&gt; (&#123;name:x, age: y&#125;)</code> &#x2F;&#x2F;当箭头函数返回一个对象时，为了避免对象被识别为块从而出现报错的情况，这里的解决办法是<strong>使用一个圆括号将返回对象包起来</strong></p>
+</li>
+</ul>
+</li>
+<li><p>用构造函数</p>
+<ul>
+<li><p><code>let f = new Function(&#39;x&#39;, &#39;y&#39;, &#39;return x+y&#39;)</code></p>
+</li>
+<li><p>很少使用，但是能让你知道函数是谁构造的</p>
+</li>
+<li><p>所有函数都是 Function 构造出来的</p>
+</li>
+<li><p>包括 Object、Array、Function 也是</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>每个函数都包含以下内容</p>
+<ul>
+<li>调用时机</li>
+<li>作用域</li>
+<li>闭包</li>
+<li>形式参数</li>
+<li>返回值</li>
+<li>调用栈</li>
+<li>函数提升</li>
+<li>arguments（除了箭头函数）</li>
+<li>this（除了箭头函数）</li>
+</ul>
+<h2 id="执行时机"><a href="#执行时机" class="headerlink" title="执行时机"></a>执行时机</h2><p>结合例子单独开一篇来讲</p>
+<h2 id="作用域-amp-闭包"><a href="#作用域-amp-闭包" class="headerlink" title="作用域&amp;闭包"></a>作用域&amp;闭包</h2><ul>
+<li><p>全局变量 VS 局部变量</p>
+<ul>
+<li>在顶级作用域下声明的变量就是全局变量</li>
+<li><strong>window 的属性是全局变量</strong></li>
+<li>除此之外的全部是局部变量</li>
+</ul>
+</li>
+<li><p>作用域的嵌套</p>
+<ul>
+<li><p>如果多个作用域有同名变量 a</p>
+<ul>
+<li><p>那么查找 a 的声明时，就向上取最近的作用域</p>
+</li>
+<li><p>简称「就近原则」</p>
+</li>
+<li><p>查找 a 的过程与函数执行无关</p>
+</li>
+<li><p>但 a 的值与函数执行有关</p>
+</li>
+</ul>
+</li>
+<li><p>以上其实说的就是作用域链，只要记住<strong>就近原则</strong>这一点就能弄明白了</p>
+</li>
+</ul>
+</li>
+<li><p>闭包</p>
+<ul>
+<li><strong>如果一个函数用到了外部的变量，那么这个函数加这个变量就叫做闭包</strong>详情以后再补充</li>
+</ul>
+</li>
+</ul>
+<h2 id="参数和返回值"><a href="#参数和返回值" class="headerlink" title="参数和返回值"></a>参数和返回值</h2><ul>
+<li>形式参数<ul>
+<li>形参的就是非实际参数</li>
+<li>形参可以认为就是变量声明</li>
+</ul>
+</li>
+<li>返回值<ul>
+<li>每一个函数都有返回值</li>
+<li>函数执行完了才有返回值</li>
+<li>只有函数才有返回值<ul>
+<li><del>1+2 的返回值是 3</del></li>
+<li>1+2 的值是 3</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="递归、调用栈、爆栈与函数提升"><a href="#递归、调用栈、爆栈与函数提升" class="headerlink" title="递归、调用栈、爆栈与函数提升"></a>递归、调用栈、爆栈与函数提升</h2><p>什么是调用栈</p>
+<ul>
+<li><p>JS 引擎在调用一个函数前</p>
+</li>
+<li><p>需要把函数所在的环境 push 到一个数组里（压栈）</p>
+</li>
+<li><p>这个数组叫做<strong>调用栈</strong></p>
+</li>
+<li><p>等函数执行完了，就会把环境弹(pop)出来（弹栈）</p>
+</li>
+<li><p>然后 return 到之前的环境，继续执行后续代码</p>
+</li>
+<li><p>调用栈最长有多少？，使用如下函数可以测试调用栈有多长</p>
+<figure class="highlight js"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">computeMaxCallStackSize</span>(<span class="hljs-params"></span>) &#123;<br><br> <span class="hljs-keyword">try</span> &#123;<br><br>  <span class="hljs-keyword">return</span> <span class="hljs-number">1</span> + <span class="hljs-title function_">computeMaxCallStackSize</span>();<br><br> &#125; <span class="hljs-keyword">catch</span> (e) &#123;<br><br>  <span class="hljs-comment">// 报错说明 stack overflow 了</span><br><br>  <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br><br> &#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>Chrome 12578</p>
+</li>
+<li><p>Firefox 26773</p>
+</li>
+<li><p>Node 12536</p>
+</li>
+</ul>
+</li>
+<li><p>爆栈：如果调用栈中压入的帧过多，程序就会崩溃</p>
+</li>
+</ul>
+<p>变量提升</p>
+<ul>
+<li><p>什么是变量提升</p>
+<ul>
+<li>function fn(){}</li>
+<li>不管你把具名函数声明在哪里，它都会跑到第一行</li>
+</ul>
+</li>
+<li><p>什么不是函数提升</p>
+<ul>
+<li><p>let fn &#x3D; function(){}</p>
+</li>
+<li><p>这是赋值，右边的匿名函数声明不会提升（let 没有变量提升）</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="arguments-与-this"><a href="#arguments-与-this" class="headerlink" title="arguments 与 this"></a>arguments 与 this</h2><ul>
+<li><p>arguments</p>
+<p>是一个伪数组，使用 Array.from 转化为数组</p>
+</li>
+<li><p>this</p>
+<ul>
+<li><p>如果没有任何指示，那么 this 就指向 window</p>
+</li>
+<li><p>目前可以用 fn.call(xxx, 1,2,3) 传 this 和 arguments</p>
+<p>如果没有使用严格模式那么 xxx 会被自动转化成对象（JS 的糟粕），如果使用严格模式那么就是原本的 xxx</p>
+</li>
+<li><p>绑定 this</p>
+<ul>
+<li><p>使用 bind() 可以让 this 不再改变</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">f1</span>(<span class="hljs-params">p1, p2</span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>, p1, p2);<br>&#125;<br><span class="hljs-keyword">let</span> f2 = f1.<span class="hljs-title function_">bind</span>(&#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;frank&#x27;</span> &#125;);<br><span class="hljs-comment">// 那么 f2 就是 f1 绑定了 this 之后的新函数</span><br><span class="hljs-title function_">f2</span>(); <span class="hljs-comment">// 等价于 f1.call(&#123;name:&#x27;frank&#x27;&#125;)</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>.bind 还可以绑定其他参数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> f3 = f1.<span class="hljs-title function_">bind</span>(&#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;frank&#x27;</span> &#125;, <span class="hljs-string">&#x27;hi&#x27;</span>);<br><span class="hljs-title function_">f3</span>(); <span class="hljs-comment">// 等价于 f1.call(&#123;name:&#x27;frank&#x27;&#125;, hi)</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><p><strong>没有 arguments 和自己的 this</strong></p>
+<h2 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h2><p>原理</p>
+<ul>
+<li><p>ES 5 时代，为了得到局部变量，必须引入一个函数</p>
+</li>
+<li><p>但是这个函数如果有名字，就得不偿失</p>
+</li>
+<li><p>于是这个函数必须是匿名函数</p>
+</li>
+<li><p>声明匿名函数，然后立即加个 () 执行它</p>
+</li>
+<li><p>但是 JS 标准认为这种语法不合法</p>
+</li>
+<li><p>所以 JS 程序员寻求各种办法</p>
+</li>
+<li><p>最终发现，只要在匿名函数前面加个运算符即可</p>
+</li>
+<li><p>!、~、()、+、- 都可以</p>
+</li>
+<li><p>但是这里面有些运算符会往上走</p>
+</li>
+<li><p><strong>所以推荐永远用 ! 来解决</strong></p>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/05/JS%E8%BF%90%E7%AE%97%E7%AC%A6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JS 运算符</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/01/JS%E5%87%BD%E6%95%B0%E7%9A%84%E6%89%A7%E8%A1%8C%E6%97%B6%E6%9C%BA%EF%BC%88%E7%BB%93%E5%90%88%E4%BE%8B%E5%AD%90%EF%BC%89/">
+                        <span class="hidden-mobile">JS 函数的执行时机</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

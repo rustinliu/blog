@@ -1,0 +1,596 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rustin Liu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="编码相关 ASCⅡ 码表  0 表示结束字符  10 表示换行  13 表示回车  32 表示空格  33 到 47 表示标点  48 到 57 表示数字符号  65 到 90 表示大写字母  97 到 122 表示小写字母  127 表示删除键  详细码表可以搜索得到，需要记住的是数字从 48 开始，大写字母在小写字母前面    unicode 编码  UTF-8 中的 8 是指最少可以用 8">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js基本数据类型定义以及转换">
+<meta property="og:url" content="http://rustin.top/2021/09/12/js%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89%E4%BB%A5%E5%8F%8A%E8%BD%AC%E6%8D%A2/index.html">
+<meta property="og:site_name" content="Rustin&#39;s Blog">
+<meta property="og:description" content="编码相关 ASCⅡ 码表  0 表示结束字符  10 表示换行  13 表示回车  32 表示空格  33 到 47 表示标点  48 到 57 表示数字符号  65 到 90 表示大写字母  97 到 122 表示小写字母  127 表示删除键  详细码表可以搜索得到，需要记住的是数字从 48 开始，大写字母在小写字母前面    unicode 编码  UTF-8 中的 8 是指最少可以用 8">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://rustin.top/img/notedefault.jpg">
+<meta property="article:published_time" content="2021-09-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-03-05T14:29:24.935Z">
+<meta property="article:author" content="Rustin Liu">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://rustin.top/img/notedefault.jpg">
+  
+  
+  <title>js基本数据类型定义以及转换 - Rustin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"rustin.top","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rustin&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="js基本数据类型定义以及转换">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-09-12 00:00" pubdate>
+        2021年9月12日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      9 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">js基本数据类型定义以及转换</h1>
+            
+            <div class="markdown-body">
+              <h2 id="编码相关"><a href="#编码相关" class="headerlink" title="编码相关"></a>编码相关</h2><ul>
+<li><p>ASCⅡ 码表</p>
+<ul>
+<li><p>0 表示结束字符</p>
+</li>
+<li><p>10 表示换行</p>
+</li>
+<li><p>13 表示回车</p>
+</li>
+<li><p>32 表示空格</p>
+</li>
+<li><p>33 到 47 表示标点</p>
+</li>
+<li><p><strong>48 到 57 表示数字符号</strong></p>
+</li>
+<li><p><strong>65 到 90 表示大写字母</strong></p>
+</li>
+<li><p><strong>97 到 122 表示小写字母</strong></p>
+</li>
+<li><p>127 表示删除键</p>
+</li>
+<li><p>详细码表可以搜索得到，需要记住的是数字从 48 开始，大写字母在小写字母前面</p>
+</li>
+</ul>
+</li>
+<li><p>unicode 编码</p>
+<ul>
+<li>UTF-8 中的 8 是指最少可以用 8 位存一个字符</li>
+</ul>
+</li>
+</ul>
+<h2 id="JS-数据类型"><a href="#JS-数据类型" class="headerlink" title="JS 数据类型"></a>JS 数据类型</h2><ul>
+<li><p>8 种数据类型</p>
+<ul>
+<li><p>7 种基本（原始）数据类型</p>
+<ul>
+<li><p>Number</p>
+<ul>
+<li>64 位浮点数</li>
+<li>0 +0 -0 都等于零</li>
+<li>infinite 、+ infinite 、- infinite</li>
+<li>NaN 表示不能表示的数字，但是<strong>NaN 是数字类型</strong><ul>
+<li>0&#x2F;0 等于 NaN</li>
+<li>NaN 不等于 NaN</li>
+</ul>
+</li>
+<li>范围<ul>
+<li>Number.MAX_VALUE: 1.7976931348623157e+308</li>
+<li>Number.MIN_VALUE: 5e-324</li>
+</ul>
+</li>
+<li>精度<ul>
+<li>最多只能到 52+1 个二进制位表示有效数字</li>
+<li>2^53 对应的十进制是 9 后面 15 个零</li>
+<li>所以 15 位有效数字都能精确表示</li>
+<li>16 位有效数字如果小于 90 开头，也能精确表示</li>
+<li>9110000000000001 就存不下来</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>String</p>
+<ul>
+<li><p>每个字符只用两个字节（阉割版 utf8）</p>
+</li>
+<li><p>写法</p>
+<ul>
+<li><p>“”</p>
+</li>
+<li><p>‘’</p>
+</li>
+<li><p>&#96;&#96; (模版字符串)</p>
+</li>
+<li><p>注意<strong>转义字符</strong></p>
+<p><img src="/images/pic14(%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6).png" srcset="/img/loading.gif" lazyload alt="pic14(转义字符)"></p>
+</li>
+<li><p>属性</p>
+<ul>
+<li>.length</li>
+</ul>
+</li>
+<li><p>base64 转码</p>
+<ul>
+<li>window.btoa() 加密</li>
+<li>window.atob()解密</li>
+<li>太简单了要少用</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Boolean</p>
+<ul>
+<li><strong>5 个 falsy</strong><ul>
+<li>Null</li>
+<li>undefinde</li>
+<li>0</li>
+<li>NaN</li>
+<li>‘’</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Null</p>
+</li>
+<li><p>Undefined</p>
+</li>
+<li><p>Sybol</p>
+</li>
+<li><p>Bigint(2020 年 6 月新加入)</p>
+</li>
+</ul>
+</li>
+<li><p>复杂数据类型：Object</p>
+</li>
+</ul>
+</li>
+<li><p>类型转换</p>
+<ul>
+<li>Number&#x3D;&gt;string<ul>
+<li>String(n)</li>
+<li>n+’’</li>
+</ul>
+</li>
+<li>String&#x3D;&gt;Number<ul>
+<li>Number(s)</li>
+<li>ParsInt(s)&#x2F;ParsFloat(s)</li>
+<li>s - 0 &#x2F; + s</li>
+</ul>
+</li>
+<li>x &#x3D;&gt;boolean<ul>
+<li>Bolean(x)</li>
+<li>!!x</li>
+</ul>
+</li>
+<li>x &#x3D;&gt;string<ul>
+<li>String(x);</li>
+<li>x.toString();</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h2><ul>
+<li><p>var</p>
+</li>
+<li><p>let</p>
+<ul>
+<li><strong>块作用域</strong></li>
+<li><strong>没有变量提升</strong>，不可重复赋值，必须先声明再使用，否则报错</li>
+<li>可以赋值，也可以不赋值</li>
+<li><strong>全局声明的 let，不会变成 window 的属性</strong></li>
+<li>for 里面使用 let 有奇效</li>
+</ul>
+</li>
+<li><p>const</p>
+<ul>
+<li>块作用域</li>
+<li><strong>没有变量提升</strong>，有且仅有一次赋值，必须先声明再使用，否则报错</li>
+<li><strong>声明时必须赋值，而且不可改</strong></li>
+<li><strong>全局声明的 const，不会变成 window 的属性</strong></li>
+</ul>
+<p>阅读材料<a target="_blank" rel="noopener" href="http://bonsaiden.github.io/JavaScript-Garden/zh/">JavaScript 秘密花园 (bonsaiden.github.io)</a></p>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/09/17/JS%20%E5%AF%B9%E8%B1%A1%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JS 对象基本用法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/07/js%E8%AF%AD%E6%B3%95/">
+                        <span class="hidden-mobile">js语法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

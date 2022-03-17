@@ -1,0 +1,479 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rustin Liu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Vue-CLI 脚手架 Vue CLI 是 Vue 的脚手架工具，它可以帮助我们快速生成 Vue 基础项目代码，提供开箱即用的功能特性。   为什么需要使用 Vue-CLI 使用 Vue.js 开发大型应用时，我们需要考虑代码目录结构、项目结构和部署、热加载、代码单元测试等事情。 如果每个项目都要手动完成这些工作，那无以效率比较低效，所以通常我们会使用一些脚手架工具来帮助完成这些事情。    1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue-Cli脚手架">
+<meta property="og:url" content="http://rustin.top/2021/12/28/Vue-Cli%E8%84%9A%E6%89%8B%E6%9E%B6/index.html">
+<meta property="og:site_name" content="Rustin&#39;s Blog">
+<meta property="og:description" content="Vue-CLI 脚手架 Vue CLI 是 Vue 的脚手架工具，它可以帮助我们快速生成 Vue 基础项目代码，提供开箱即用的功能特性。   为什么需要使用 Vue-CLI 使用 Vue.js 开发大型应用时，我们需要考虑代码目录结构、项目结构和部署、热加载、代码单元测试等事情。 如果每个项目都要手动完成这些工作，那无以效率比较低效，所以通常我们会使用一些脚手架工具来帮助完成这些事情。    1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://rustin.top/img/notedefault.jpg">
+<meta property="article:published_time" content="2021-12-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-03-05T15:48:16.346Z">
+<meta property="article:author" content="Rustin Liu">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://rustin.top/img/notedefault.jpg">
+  
+  
+  <title>Vue-Cli脚手架 - Rustin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"rustin.top","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rustin&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Vue-Cli脚手架">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-28 00:00" pubdate>
+        2021年12月28日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Vue-Cli脚手架</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Vue-CLI-脚手架"><a href="#Vue-CLI-脚手架" class="headerlink" title="Vue-CLI 脚手架"></a>Vue-CLI 脚手架</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://cli.vuejs.org/zh/">Vue CLI</a> 是 Vue 的脚手架工具，它可以帮助我们快速生成 Vue 基础项目代码，提供开箱即用的功能特性。</p>
+</blockquote>
+<ul>
+<li>为什么需要使用 Vue-CLI<ul>
+<li>使用 Vue.js 开发大型应用时，我们需要考虑代码目录结构、项目结构和部署、热加载、代码单元测试等事情。</li>
+<li>如果每个项目都要手动完成这些工作，那无以效率比较低效，所以通常我们会使用一些脚手架工具来帮助完成这些事情。</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-Vue-CLI-的使用"><a href="#1-Vue-CLI-的使用" class="headerlink" title="1 Vue-CLI 的使用"></a>1 Vue-CLI 的使用</h2><ul>
+<li><p>安装 Vue 脚手架</p>
+<ul>
+<li>&#96;&#96;&#96;shell<br>npm install -g @vue&#x2F;cli@版本号<figure class="highlight autohotkey"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><pre><code class="hljs autohotkey"><br>-   Vue CLI2 初始化项目<br><br>    -   ```shell<br>        vue init webpack my-project<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>Vue CLI3 初始化项目</p>
+<ul>
+<li>&#96;&#96;&#96;shell<br>vue create my-project<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs awk"><br><span class="hljs-comment">## 2 Vue-CLI2 详解</span><br><br><span class="hljs-comment">### 2.1 步骤详解</span><br><br>![image-<span class="hljs-number">20200923112538728</span>](https:<span class="hljs-regexp">//i</span>.loli.net<span class="hljs-regexp">/2020/</span><span class="hljs-number">09</span><span class="hljs-regexp">/25/g</span>Xfdbyo7erTmz19.png)<br><br><span class="hljs-comment">### 2.2 目录详解</span><br><br>![image-<span class="hljs-number">20200923112626821</span>](https:<span class="hljs-regexp">//i</span>.loli.net<span class="hljs-regexp">/2020/</span><span class="hljs-number">09</span><span class="hljs-regexp">/25/</span><span class="hljs-number">9</span>eP2bklLcqVTywp.png)<br><br><span class="hljs-comment">## 3 Runtime-Compiler 和 Runtime-only 的区别</span><br><br>-   **<span class="hljs-number">1</span>、Runtime-Compiler 和 Runtime-only 的 main.js 文件的区别：**<br><br>```javascript<br><span class="hljs-regexp">//</span>（<span class="hljs-number">1</span>） Runtime-Compiler<br>new Vue(&#123;<br>  el: <span class="hljs-string">&#x27;#app&#x27;</span>,<br>  router,<br>  components: &#123; App &#125;,<br>  template: <span class="hljs-string">&#x27;&lt;App/&gt;&#x27;</span><br>&#125;)<br><br><span class="hljs-regexp">//</span> （<span class="hljs-number">2</span>）Runtime-only<br>new Vue(&#123;<br>  el: <span class="hljs-string">&#x27;#app&#x27;</span>,<br>  router,<br>  render: h =&gt; h(App)<br>&#125;)<br><br><span class="hljs-regexp">//</span> Runtime-Complier 解析过程：<br>第一步：将template模板转换成抽象语法树（ast）;<br>第二步：通过render函数将抽象语法树转换成虚拟DOM（vdom）;<br>第三步：将虚拟DOM转换成真正的DOM；<br>template =&gt; 抽象语法树(ast) =&gt; render() =&gt; 虚拟DOM(vdom) =&gt; 页面<br><br><span class="hljs-regexp">//</span> Runtime-only 解析过程：<br>第一步：vue-template-compiler插件直接将组件转换成 render函数；<br>第二步：将render函数返回的虚拟DOM转换成页面；<br>render() =&gt; 虚拟DOM(vdom) =&gt; 页面；<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>2.render()函数</strong></p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> render = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">var</span> _vm = <span class="hljs-variable language_">this</span>;<br>    <span class="hljs-keyword">var</span> _h = _vm.<span class="hljs-property">$createElement</span>;<br>    <span class="hljs-keyword">var</span> _c = _vm.<span class="hljs-property">_self</span>.<span class="hljs-property">_c</span> || _h;<br>    <span class="hljs-keyword">return</span> <span class="hljs-title function_">_c</span>(<br>        <span class="hljs-string">&#x27;div&#x27;</span>,<br>        &#123; <span class="hljs-attr">attrs</span>: &#123; <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;app&#x27;</span> &#125; &#125;,<br>        [<br>            <span class="hljs-title function_">_c</span>(<span class="hljs-string">&#x27;img&#x27;</span>, &#123; <span class="hljs-attr">attrs</span>: &#123; <span class="hljs-attr">src</span>: <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./assets/logo.png&#x27;</span>) &#125; &#125;),<br>            _vm.<span class="hljs-title function_">_v</span>(<span class="hljs-string">&#x27; &#x27;</span>),<br>            <span class="hljs-title function_">_c</span>(<span class="hljs-string">&#x27;router-view&#x27;</span>),<br>        ],<br>        <span class="hljs-number">1</span><br>    );<br>&#125;;<br><span class="hljs-comment">// render函数返回的是虚拟DOM</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><ol start="3">
+<li>俩者的区别对比</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs txt">（1）Runtime-only性能更高；<br>（2）Runtime-only代码量更少；<br></code></pre></td></tr></table></figure>
+
+<h2 id="4-Vue-CLI3-详解"><a href="#4-Vue-CLI3-详解" class="headerlink" title="4 Vue-CLI3 详解"></a>4 Vue-CLI3 详解</h2><p><strong>CLI2 和 CLI3 的区别</strong></p>
+<ul>
+<li>vue-cli 3 与 2 版本有很大区别<ul>
+<li>vue-cli 3 是基于 webpack 4 打造，vue-cli 2 还是 webapck 3</li>
+<li>vue-cli 3 的设计原则是“<strong>0 配置”，移除的配置文件根目录下的，build 和 config 等目录</strong></li>
+<li>vue-cli 3 提供了 vue ui 命令，提供了可视化配置，更加人性化</li>
+<li><strong>移除了 static 文件夹，新增了 public 文件夹，并且 index.html 移动到 public 中</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="4-1-安装步骤详解"><a href="#4-1-安装步骤详解" class="headerlink" title="4.1 安装步骤详解"></a>4.1 安装步骤详解</h3><p><img src="https://i.loli.net/2020/09/25/sXYTBZDdym5GiF4.png" srcset="/img/loading.gif" lazyload alt="image-20200923113522511"></p>
+<h3 id="4-2-目录结构详解"><a href="#4-2-目录结构详解" class="headerlink" title="4.2 目录结构详解"></a>4.2 目录结构详解</h3><p><img src="https://i.loli.net/2020/09/25/F6ybPXaMpt8vSIh.png" srcset="/img/loading.gif" lazyload alt="image-20200923113601396"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Vue/">Vue</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/02/Typescript%E7%AC%94%E8%AE%B01/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">TypeScript学习总结之基础类型</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/12/27/Vue-router%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/">
+                        <span class="hidden-mobile">Vuerouter前端路由</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

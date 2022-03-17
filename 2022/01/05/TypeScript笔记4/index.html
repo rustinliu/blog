@@ -1,0 +1,514 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rustin Liu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="​ 接口 interface 在 TypeScript 学习总结之基础类型 那一章节中，我稍微学习了一下 接口 interface， 对它有了初步了解， 接下来总结的是 TS 文档接口这一章节。  函数类型以官方文档代码为例， 我分析了几种函数注解的方式： 方式一: （最常见的） 123456789interface SearchFunc &amp;#123;    (source: string, su">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TypeScript学习总结之接口">
+<meta property="og:url" content="http://rustin.top/2022/01/05/TypeScript%E7%AC%94%E8%AE%B04/index.html">
+<meta property="og:site_name" content="Rustin&#39;s Blog">
+<meta property="og:description" content="​ 接口 interface 在 TypeScript 学习总结之基础类型 那一章节中，我稍微学习了一下 接口 interface， 对它有了初步了解， 接下来总结的是 TS 文档接口这一章节。  函数类型以官方文档代码为例， 我分析了几种函数注解的方式： 方式一: （最常见的） 123456789interface SearchFunc &amp;#123;    (source: string, su">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://rustin.top/img/notedefault.jpg">
+<meta property="article:published_time" content="2022-01-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-03-15T14:29:18.779Z">
+<meta property="article:author" content="Rustin Liu">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="TypeScript">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://rustin.top/img/notedefault.jpg">
+  
+  
+  <title>TypeScript学习总结之接口 - Rustin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"rustin.top","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rustin&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="TypeScript学习总结之接口">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-05 00:00" pubdate>
+        2022年1月5日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      44 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">TypeScript学习总结之接口</h1>
+            
+            <div class="markdown-body">
+              <p>​</p>
+<h2 id="接口-interface"><a href="#接口-interface" class="headerlink" title="接口 interface"></a>接口 interface</h2><blockquote>
+<p>在 TypeScript 学习总结之基础类型 那一章节中，我稍微学习了一下 接口 interface， 对它有了初步了解， 接下来总结的是 TS 文档接口这一章节。</p>
+</blockquote>
+<h3 id="函数类型"><a href="#函数类型" class="headerlink" title="函数类型"></a>函数类型</h3><p>以官方文档代码为例， 我分析了几种函数注解的方式：</p>
+<p><strong>方式一:</strong></p>
+<p>（最常见的）</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">SearchFunc</span> &#123;<br>    (<span class="hljs-attr">source</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">subString</span>: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">boolean</span>;<br>&#125;<br><br><span class="hljs-keyword">let</span> <span class="hljs-attr">mySearch</span>: <span class="hljs-title class_">SearchFunc</span>;<br>mySearch = <span class="hljs-keyword">function</span> (<span class="hljs-params">source: <span class="hljs-built_in">string</span>, subString: <span class="hljs-built_in">string</span></span>) &#123;<br>    <span class="hljs-keyword">let</span> result = source.<span class="hljs-title function_">search</span>(subString);<br>    <span class="hljs-keyword">return</span> result &gt; -<span class="hljs-number">1</span>;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p><strong>方式二:</strong></p>
+<p>&#x2F;&#x2F; 这种注解方式， 你会发现它同样把函数的实现方式也给实现了。 这样做不太好</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">SearchFunc</span> &#123;<br>    (<span class="hljs-attr">source</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">subString</span>: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">boolean</span>;<br>&#125;<br><br><span class="hljs-comment">// let mySearch: SearchFunc;</span><br><span class="hljs-comment">// mySearch = function (source: string, subString: string) &#123;</span><br><span class="hljs-comment">//   let result = source.search(subString);</span><br><span class="hljs-comment">//   return result &gt; -1;</span><br><span class="hljs-comment">// &#125;</span><br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">mySearch</span>(<span class="hljs-params">source: <span class="hljs-built_in">string</span>, subString: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">boolean</span> &#123;<br>    <span class="hljs-keyword">let</span> result = source.<span class="hljs-title function_">search</span>(subString);<br>    <span class="hljs-keyword">return</span> result &gt; -<span class="hljs-number">1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>方式三：</strong></p>
+<p>&#x2F;&#x2F; 通过 表达式的方式 你会发现 代码会显得特别长</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">SearchFunc</span> &#123;<br>    (<span class="hljs-attr">source</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">subString</span>: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">boolean</span>;<br>&#125;<br><br><span class="hljs-keyword">let</span> <span class="hljs-attr">mySearch</span>: <span class="hljs-function">(<span class="hljs-params">source: <span class="hljs-built_in">string</span>, subString: <span class="hljs-built_in">string</span></span>) =&gt;</span> <span class="hljs-built_in">boolean</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span><br><span class="hljs-params">    source: <span class="hljs-built_in">string</span>,</span><br><span class="hljs-params">    subString: <span class="hljs-built_in">string</span></span><br><span class="hljs-params"></span>): <span class="hljs-built_in">boolean</span> &#123;<br>    <span class="hljs-keyword">let</span> result = source.<span class="hljs-title function_">search</span>(subString);<br>    <span class="hljs-keyword">return</span> result &gt; -<span class="hljs-number">1</span>;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p><strong>方式四：</strong></p>
+<p>把方式三 给抽离出来看看</p>
+<ol>
+<li>使用类型别名：</li>
+<li>使用 接口 interface （这个和方式一 就一模一样了）)</li>
+</ol>
+<p>&#x2F;&#x2F; 1.类型别名 方式</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">// 类型别名 方式</span><br><span class="hljs-keyword">type</span> <span class="hljs-title class_">SearchFunc</span> = <span class="hljs-function">(<span class="hljs-params">source: <span class="hljs-built_in">string</span>, subString: <span class="hljs-built_in">string</span></span>) =&gt;</span> <span class="hljs-built_in">boolean</span>;<br><br><span class="hljs-keyword">let</span> <span class="hljs-attr">mySearch</span>: <span class="hljs-title class_">SearchFunc</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">source: <span class="hljs-built_in">string</span>, subString: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">boolean</span> &#123;<br>    <span class="hljs-keyword">let</span> result = source.<span class="hljs-title function_">search</span>(subString);<br>    <span class="hljs-keyword">return</span> result &gt; -<span class="hljs-number">1</span>;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>&#x2F;&#x2F; 2.接口 interface 方式 （最常见的）</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">// 接口 interface</span><br><span class="hljs-keyword">interface</span> <span class="hljs-title class_">SearchFunc</span> &#123;<br>    (<span class="hljs-attr">source</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">subString</span>: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">boolean</span>;<br>&#125;<br><br><span class="hljs-keyword">let</span> <span class="hljs-attr">mySearch</span>: <span class="hljs-title class_">SearchFunc</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">source: <span class="hljs-built_in">string</span>, subString: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">boolean</span> &#123;<br>    <span class="hljs-keyword">let</span> result = source.<span class="hljs-title function_">search</span>(subString);<br>    <span class="hljs-keyword">return</span> result &gt; -<span class="hljs-number">1</span>;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<h3 id="可索引的类型-接口"><a href="#可索引的类型-接口" class="headerlink" title="可索引的类型 接口"></a>可索引的类型 接口</h3><blockquote>
+<p>可索引的类型的接口 指的就是 数组类型的接口</p>
+</blockquote>
+<p>可索引类型具有一个 索引签名，它描述了对象索引的类型，还有相应的索引返回值类型。</p>
+<p>TypeScript 支持两种索引签名：字符串和数字。 可以同时使用两种类型的索引，但是数字索引的返回值必须是字符串索引返回值类型的子类型。</p>
+<p>示例：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">NumberArray</span> &#123;<br>    [<span class="hljs-attr">index</span>: <span class="hljs-built_in">number</span>]: <span class="hljs-built_in">number</span>;<br>&#125;<br><br><span class="hljs-keyword">let</span> <span class="hljs-attr">obj</span>: <span class="hljs-title class_">NumberArray</span> = &#123;<br>    <span class="hljs-number">0</span>: <span class="hljs-number">1</span>, <span class="hljs-comment">// 其实这个索引值 0 1 2 都是字符串 虽然定义的是数字， 但终究会转换成string</span><br>    <span class="hljs-number">1</span>: <span class="hljs-number">2</span>,<br>    <span class="hljs-number">2</span>: <span class="hljs-number">3</span>,<br>&#125;;<br><br><span class="hljs-keyword">let</span> <span class="hljs-attr">arr</span>: <span class="hljs-title class_">NumberArray</span> = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>];<br></code></pre></td></tr></table></figure>
+
+<p>因为当使用 number 来索引时， JavaScript 终究会将它转换成 string 然后再去索引对象。</p>
+<p><strong>由此可知：在索引签名中， string 是包含着 number 的</strong></p>
+<p>再举个例子:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Animal</span> &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;<br>&#125;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Dog</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Animal</span> &#123;<br>    <span class="hljs-attr">breed</span>: <span class="hljs-built_in">string</span>;<br>&#125;<br><br><span class="hljs-comment">// 错误：使用数值型的字符串索引，有时会得到完全不同的Animal!</span><br><span class="hljs-comment">// interface NotOkay &#123;</span><br><span class="hljs-comment">//   [x: number]: Animal;</span><br><span class="hljs-comment">//   [x: string]: Dog;</span><br><span class="hljs-comment">// &#125;</span><br><br><span class="hljs-comment">// success</span><br><span class="hljs-keyword">interface</span> <span class="hljs-title class_">NotOkay</span> &#123;<br>    [<span class="hljs-attr">x</span>: <span class="hljs-built_in">string</span>]: <span class="hljs-title class_">Animal</span>; <span class="hljs-comment">//因为Animal是父类，只能是string</span><br>    [<span class="hljs-attr">x</span>: <span class="hljs-built_in">number</span>]: <span class="hljs-title class_">Dog</span>; <span class="hljs-comment">// Dog继承了Animal 但索引又想和Animal一样，那么把它换成number即可</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p>再看看 索引的返回值， 索引签名中 规定是什么类型就是什么类型，</p>
+<p>因为 对象中 key 一定是字符串，但 value 不一定是</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">NumberDictionary</span> &#123;<br>    [<span class="hljs-attr">index</span>: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">number</span>;<br>    <span class="hljs-attr">length</span>: <span class="hljs-built_in">number</span>; <span class="hljs-comment">// 可以，length是number类型</span><br>    <span class="hljs-comment">// name: string       // 错误，`name`的类型与索引类型返回值的类型不匹配</span><br>    <span class="hljs-attr">name</span>: <span class="hljs-built_in">number</span>; <span class="hljs-comment">// OK</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="类-类型接口"><a href="#类-类型接口" class="headerlink" title="类 类型接口"></a>类 类型接口</h3><blockquote>
+<p>对 类 的一部分行为进行抽象；</p>
+</blockquote>
+<blockquote>
+<p>类实现所有接口中的属性和方法 &amp;&amp; 对比 对象类： 抽象方法需要实现</p>
+</blockquote>
+<p>与 C#或 Java 里接口的基本作用一样，TypeScript 也能够用它来明确的强制一个类去符合某种契约。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">ClockInterface</span> &#123;<br>    <span class="hljs-attr">currentTime</span>: <span class="hljs-title class_">Date</span>; <span class="hljs-comment">// 定义属性</span><br>    <span class="hljs-title function_">setTime</span>(<span class="hljs-attr">d</span>: <span class="hljs-title class_">Date</span>): <span class="hljs-built_in">void</span>; <span class="hljs-comment">// 定义方法</span><br>&#125;<br><span class="hljs-comment">// implements  实现   专门用来实现接口</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Clock</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ClockInterface</span> &#123;<br>    currentTime = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(); <span class="hljs-comment">// 实现实现</span><br>    <span class="hljs-title function_">setTime</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-comment">// 实现方法</span><br>    &#125;<br>    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">h: <span class="hljs-built_in">number</span>, m: <span class="hljs-built_in">number</span></span>) &#123;&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>类继承+类类型接口 示例：</strong></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Alarm</span> &#123;<br>    <span class="hljs-comment">//  警告器</span><br>    <span class="hljs-title function_">alert</span>(): <span class="hljs-built_in">void</span>;<br>&#125;<br><br><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Light</span> &#123;<br>    <span class="hljs-comment">//  车灯</span><br>    <span class="hljs-attr">color</span>: <span class="hljs-built_in">string</span>;<br>    <span class="hljs-title function_">lightOn</span>(): <span class="hljs-built_in">void</span>;<br>    <span class="hljs-title function_">lightOff</span>(): <span class="hljs-built_in">void</span>;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Door</span> &#123;&#125;<br><span class="hljs-comment">// 继承 Door （门） 这个类  然后实现   Alarm  接口</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">securityDoor</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Door</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Alarm</span> &#123;<br>    <span class="hljs-title function_">alert</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;咚咚咚&#x27;</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">// car 要实现 这个俩个接口的方法和属性</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">car</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Alarm</span>, <span class="hljs-title class_">Light</span> &#123;<br>    color = <span class="hljs-string">&#x27;red&#x27;</span>;<br>    <span class="hljs-title function_">alert</span>(<span class="hljs-params"></span>) &#123;&#125;<br>    <span class="hljs-title function_">lightOn</span>(<span class="hljs-params"></span>) &#123;&#125;<br>    <span class="hljs-title function_">lightOff</span>(<span class="hljs-params"></span>) &#123;&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="类静态部分与实例部分的区别"><a href="#类静态部分与实例部分的区别" class="headerlink" title="类静态部分与实例部分的区别"></a>类静态部分与实例部分的区别</h3><p>类是具有两个类型的：静态部分的类型和实例的类型</p>
+<p>而 constructor 存在于类的静态部分， 所以不再检查的范围内</p>
+<p>因此，类静态部分和实例部分需要单独分开来做</p>
+<p>示例：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">// 定于一个  闹钟接口</span><br><span class="hljs-keyword">interface</span> <span class="hljs-title class_">ClockInterface</span> &#123;<br>    <span class="hljs-attr">currentTime</span>: <span class="hljs-title class_">Date</span>;<br>    <span class="hljs-title function_">getTime</span>(<span class="hljs-attr">hour</span>: <span class="hljs-built_in">number</span>, <span class="hljs-attr">mins</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">any</span>;<br>&#125;<br><span class="hljs-comment">// 定于一个  闹钟构造函数接口</span><br><span class="hljs-keyword">interface</span> <span class="hljs-title class_">ClockConstructor</span> &#123;<br>    <span class="hljs-keyword">new</span> (<span class="hljs-attr">hour</span>: <span class="hljs-built_in">number</span>, <span class="hljs-attr">mins</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">any</span>;<br>&#125;<br><br><span class="hljs-comment">// Clock 去实现 闹钟接口ClockInterface</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Clock</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ClockInterface</span> &#123;<br>    currentTime = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>();<br>    <span class="hljs-title function_">getTime</span>(<span class="hljs-params"></span>) &#123;&#125;<br>&#125;<br><br><span class="hljs-comment">// 定义一个构造函数 createClock 通过构造函数检查构造函数的方式 去 new 一个C</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">createClock</span>(<span class="hljs-params">C: ClockConstructor, hour: <span class="hljs-built_in">number</span>, mins: <span class="hljs-built_in">number</span></span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title function_">C</span>(hour, mins);<br>&#125;<br><br><span class="hljs-comment">// 实例化</span><br><span class="hljs-keyword">let</span> clock = <span class="hljs-title function_">createClock</span>(<span class="hljs-title class_">Clock</span>, <span class="hljs-number">12</span>, <span class="hljs-number">12</span>);<br></code></pre></td></tr></table></figure>
+
+<h3 id="接口继承接口"><a href="#接口继承接口" class="headerlink" title="接口继承接口"></a>接口继承接口</h3><p>因为 接口是对对象的形状进行描述； 所以接口可以继承接口，</p>
+<p>和类一样，接口也可以相互继承。 这让我们能够从一个接口里复制成员到另一个接口里，可以更灵活地将接口分割到可重用的模块里。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Shape</span> &#123;<br>    <span class="hljs-attr">color</span>: <span class="hljs-built_in">string</span>;<br>&#125;<br><br><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Square</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Shape</span> &#123;<br>    <span class="hljs-attr">sideLength</span>: <span class="hljs-built_in">number</span>;<br>&#125;<br><br><span class="hljs-comment">// 类型断言</span><br><span class="hljs-comment">// let square = &lt;Square&gt;&#123;&#125;;</span><br><span class="hljs-keyword">let</span> square = &#123;&#125; <span class="hljs-keyword">as</span> <span class="hljs-title class_">Square</span>;<br>square.<span class="hljs-property">color</span> = <span class="hljs-string">&#x27;blue&#x27;</span>;<br>square.<span class="hljs-property">sideLength</span> = <span class="hljs-number">10</span>;<br></code></pre></td></tr></table></figure>
+
+<h3 id="混合类型"><a href="#混合类型" class="headerlink" title="混合类型"></a>混合类型</h3><p>函数类型的 interface ，添加属性的方式来实现 对象的 interface</p>
+<p>相当于 函数类型的 interface + 对象类型的 interface</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Counter</span> &#123;<br>    (<span class="hljs-attr">start</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">string</span>; <span class="hljs-comment">// 有点像构造函数</span><br>    <span class="hljs-attr">interval</span>: <span class="hljs-built_in">number</span>;<br>    <span class="hljs-title function_">reset</span>(): <span class="hljs-built_in">void</span>;<br>&#125;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">getCounter</span>(<span class="hljs-params"></span>): <span class="hljs-title class_">Counter</span> &#123;<br>    <span class="hljs-keyword">let</span> counter = &lt;<span class="hljs-title class_">Counter</span>&gt;<span class="hljs-keyword">function</span> (<span class="hljs-params">start: <span class="hljs-built_in">number</span></span>) &#123;&#125;; <span class="hljs-comment">// 断言   可以理解为 给 counter 初始值</span><br>    counter.<span class="hljs-property">interval</span> = <span class="hljs-number">123</span>;<br>    counter.<span class="hljs-property">reset</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;&#125;;<br>    <span class="hljs-keyword">return</span> counter;<br>&#125;<br><br><span class="hljs-keyword">let</span> c = <span class="hljs-title function_">getCounter</span>();<br><span class="hljs-title function_">c</span>(<span class="hljs-number">10</span>);<br>c.<span class="hljs-title function_">reset</span>();<br>c.<span class="hljs-property">interval</span> = <span class="hljs-number">5.0</span>;<br></code></pre></td></tr></table></figure>
+
+<h3 id="接口继承类"><a href="#接口继承类" class="headerlink" title="接口继承类"></a>接口继承类</h3><ol>
+<li>接口可以接触接口</li>
+<li>接口可以继承类</li>
+<li>类可以实现接口</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">//   定义 类</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Control</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-attr">state</span>: <span class="hljs-built_in">any</span>;<br>&#125;<br><br><span class="hljs-comment">//  接口继承类</span><br><span class="hljs-keyword">interface</span> <span class="hljs-title class_">SelectableControl</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Control</span> &#123;<br>    <span class="hljs-title function_">select</span>(): <span class="hljs-built_in">void</span>;<br>&#125;<br><br><span class="hljs-comment">//   类继承类然后实现接口</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Button</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Control</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">SelectableControl</span> &#123;<br>    <span class="hljs-title function_">select</span>(<span class="hljs-params"></span>) &#123;&#125;<br>&#125;<br><br><span class="hljs-comment">//  类继承接口</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TextBox</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Control</span> &#123;<br>    <span class="hljs-title function_">select</span>(<span class="hljs-params"></span>) &#123;&#125;<br>&#125;<br><br><span class="hljs-comment">// 错误：“Image”类型缺少“state”属性。</span><br><span class="hljs-comment">// class Images implements SelectableControl &#123;</span><br><span class="hljs-comment">//   select() &#123; &#125;</span><br><span class="hljs-comment">// &#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>最后，看了俩遍文档还是有点迷。。。。。 以后多练习练习</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/TypeScript/">TypeScript</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/06/TypeScript%E7%AC%94%E8%AE%B05/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">TypeScript学习总结之泛型</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/03/TypeScript%E7%AC%94%E8%AE%B02/">
+                        <span class="hidden-mobile">TypeScript学习总结之函数</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

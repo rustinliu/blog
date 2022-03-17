@@ -1,0 +1,575 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rustin Liu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="获取元素  window.id 或者直接用 id 就可以（前提为 id 未被使用） document.getElementByid(‘id’) document.getElementsbyTagname(‘div’)[0] document.getElemenstbyClassName(‘red’)[0] document.querySelector(‘#id’) Document.queryS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dom编程">
+<meta property="og:url" content="http://rustin.top/2021/10/15/DOM%E7%BC%96%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Rustin&#39;s Blog">
+<meta property="og:description" content="获取元素  window.id 或者直接用 id 就可以（前提为 id 未被使用） document.getElementByid(‘id’) document.getElementsbyTagname(‘div’)[0] document.getElemenstbyClassName(‘red’)[0] document.querySelector(‘#id’) Document.queryS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://rustin.top/img/notedefault.jpg">
+<meta property="article:published_time" content="2021-10-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-03-05T14:52:57.093Z">
+<meta property="article:author" content="Rustin Liu">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="DOM">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://rustin.top/img/notedefault.jpg">
+  
+  
+  <title>Dom编程 - Rustin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"rustin.top","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rustin&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Dom编程">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-15 00:00" pubdate>
+        2021年10月15日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Dom编程</h1>
+            
+            <div class="markdown-body">
+              <ul>
+<li><p>获取元素</p>
+<ul>
+<li>window.id 或者直接用 id 就可以（前提为 id 未被使用）</li>
+<li>document.getElementByid(‘id’)</li>
+<li>document.getElementsbyTagname(‘div’)[0]</li>
+<li>document.getElemenstbyClassName(‘red’)[0]</li>
+<li>document.querySelector(‘#id’)</li>
+<li>Document.querySelectorAll(‘.red’)[0]</li>
+<li>几个特殊情况<ul>
+<li>获取 html 元素<ul>
+<li>document.documentElement</li>
+</ul>
+</li>
+<li>获取 head 元素<ul>
+<li>document.head</li>
+</ul>
+</li>
+<li>获取 body 元素<ul>
+<li>document.body</li>
+</ul>
+</li>
+<li>获取窗口（窗口不是元素）<ul>
+<li>window</li>
+</ul>
+</li>
+<li>获取所有元素<ul>
+<li>document.all(<strong>document.all 是第六个 falsy 值</strong>)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>元素的 6 层原型链</p>
+<p><img src="/images/pic20(DOM%E5%85%83%E7%B4%A06%E5%B1%82%E5%8E%9F%E5%9E%8B%E9%93%BE).png" srcset="/img/loading.gif" lazyload alt="pic20(DOM元素6层原型链)"></p>
+</li>
+</ul>
+<h2 id="元素的增删改查"><a href="#元素的增删改查" class="headerlink" title="元素的增删改查"></a>元素的增删改查</h2><ul>
+<li>增<ul>
+<li>创建一个标签节点<ul>
+<li>let div1 &#x3D; document.createElement(‘div’)</li>
+</ul>
+</li>
+<li>创建一个文本节点<ul>
+<li>text1 &#x3D; document.createTextNode(‘你好’)</li>
+</ul>
+</li>
+<li>标签里面插入文本<ul>
+<li>div.appendchild(text1)</li>
+<li>Div.innerText &#x3D; ‘hello’或 div1.textContent&#x3D; ‘hello’</li>
+<li><strong>但是不能用 div.appendchild(‘你好’)</strong></li>
+</ul>
+</li>
+<li>插入页面之中<ul>
+<li>Document.body.appendchild(div)</li>
+<li>已在页面中的元素.append(div)</li>
+<li><strong>一个元素不能放在两个地方，除非复制（cloneNode）一份</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>删<ul>
+<li>childNode.remove()</li>
+</ul>
+</li>
+<li>改<ul>
+<li>改 class：div.className &#x3D; ‘red’ &#x2F;&#x2F;会覆盖</li>
+<li>改 class：div.classList.add(‘red’)</li>
+<li>改 style：div.style &#x3D; “width:100px;color:red;”</li>
+<li>改 style 的一部分：div.style.width &#x3D; ‘200px’</li>
+<li>注意大小写：div.style.backgroundColor&#x3D;’red’</li>
+<li><strong>改 data-*属性：div.dataset.x&#x3D;’frank’</strong></li>
+<li>读属性<ul>
+<li>div.classList&#x2F;a.herf(<strong>直接使用可能会获取到被浏览器加工的值，</strong>)</li>
+<li>div.getAttribute(‘class’)&#x2F;a.getAttribute(‘herf’)</li>
+</ul>
+</li>
+<li>改事件处理函数<ul>
+<li>div.onclick 默认为 null</li>
+<li>设置 div.onclick&#x3D;fn()是这样调用的 fn.call(div,evt)，也就是<strong>说 this 是被设置为 div</strong>，evt 是事件函数</li>
+<li>div.addEventListener</li>
+</ul>
+</li>
+<li>改内容<ul>
+<li>div.innerText &#x3D; ‘xxx’</li>
+<li>Div.textContent&#x3D;’xxx’</li>
+<li>都是一样的，我一般用 innerText</li>
+</ul>
+</li>
+<li>改 html 内容<ul>
+<li>div.innerHTML&#x3D;’’</li>
+</ul>
+</li>
+<li>改标签<ul>
+<li>div.innerHTML&#x3D;’’&#x2F;&#x2F;先清空</li>
+<li>div.appendChild(div2)&#x2F;&#x2F;再加内容</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>查<ul>
+<li>父级元素<ul>
+<li>node.parentNode 或者 node.parentElement</li>
+<li>Node.parentNode.parentNode</li>
+</ul>
+</li>
+<li>子级元素<ul>
+<li>node.childNodes 或者 node.children</li>
+</ul>
+</li>
+<li>查同级元素<ul>
+<li>node.parentNode.childNodes(需要另外排除自己)</li>
+<li>node.parentNode.children(需要另外排除自己)</li>
+</ul>
+</li>
+<li>查第一个元素<ul>
+<li>node.firstchild</li>
+</ul>
+</li>
+<li>查看最后一个元素<ul>
+<li>node.lastchild</li>
+</ul>
+</li>
+<li>查看上一个节点&#x2F;元素<ul>
+<li>node.previousSibing&#x2F;node.previousElementsibing</li>
+</ul>
+</li>
+<li>查看下一个节点&#x2F;元素<ul>
+<li>node.nextSibing&#x2F;node.nextElementsibing</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="DOM-操作是跨线程的"><a href="#DOM-操作是跨线程的" class="headerlink" title="DOM 操作是跨线程的"></a>DOM 操作是跨线程的</h2><p>浏览器有 JS 引擎和渲染引擎，JS 不能操作页面，只能操作 JS，反之渲染引擎也只能操作页面，不能操作页面</p>
+<p><img src="/images/pic21.png" srcset="/img/loading.gif" lazyload alt="pic21"></p>
+<p><img src="/images/pic22.png" srcset="/img/loading.gif" lazyload alt="pic22"></p>
+<p><img src="/images/pic23.png" srcset="/img/loading.gif" lazyload alt="pic23"></p>
+<p>关于为什么操作 DOM 慢可以再看一下下面的文章：</p>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000004114594">为什么说 DOM 操作很慢 - SegmentFault 思否</a></p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/6817093/but-whys-the-browser-dom-still-so-slow-after-10-years-of-effort">javascript - But why’s the browser DOM still so slow after 10 years of effort? - Stack Overflow</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/DOM/">DOM</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/18/JQuery%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JQuery中的设计模式</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/07/Js%E5%B0%8F%E7%BB%93/">
+                        <span class="hidden-mobile">JS 小结</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
