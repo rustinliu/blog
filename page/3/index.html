@@ -177,6 +177,54 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/12/20/Vue%E4%B8%AD%E7%9A%84.sync%E4%BF%AE%E9%A5%B0%E7%AC%A6/" target="_self">
+          <img src="/img/notedefault.jpg" srcset="/img/loading.gif" lazyload alt="Vue中.sync修饰符的理解">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/12/20/Vue%E4%B8%AD%E7%9A%84.sync%E4%BF%AE%E9%A5%B0%E7%AC%A6/" target="_self">
+          Vue中.sync修饰符的理解
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/12/20/Vue%E4%B8%AD%E7%9A%84.sync%E4%BF%AE%E9%A5%B0%E7%AC%A6/" target="_self">
+          
+          为什么需要使用.sync首先可以参考官方文档对于.sync 的解释，简单来说，就是因为子组件无法直接修改父组件传入的 prop，如果直接修改，Vue 会弹出一个警告，而且实际运行的效果也不是我们期望的，这时候就需要有一个办法来让我们能够实现子组件修改父组件传入的参数，这里可以使用之前跨对象通行的办法，用 Vue 自带的 EventBus 来解决这个问题。 举例说明12345678910111213
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-20 00:00" pubdate>
+              2021-12-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/Vue/">Vue</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2021/12/18/webpack%E5%85%A5%E9%97%A8%E9%85%8D%E7%BD%AE%E6%80%BB%E7%BB%93/" target="_self">
           <img src="/img/notedefault.jpg" srcset="/img/loading.gif" lazyload alt="Webpack入门配置总结">
         </a>
@@ -597,59 +645,9 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/JavaScript/">JavaScript</a>
-            
               <a href="/tags/ES6/">ES6</a>
             
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/11/27/%E5%90%8C%E6%BA%90%E4%B8%8E%E8%B7%A8%E5%9F%9F/" target="_self">
-          <img src="/img/notedefault.jpg" srcset="/img/loading.gif" lazyload alt="同源和跨域">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/11/27/%E5%90%8C%E6%BA%90%E4%B8%8E%E8%B7%A8%E5%9F%9F/" target="_self">
-          同源和跨域
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/11/27/%E5%90%8C%E6%BA%90%E4%B8%8E%E8%B7%A8%E5%9F%9F/" target="_self">
-          
-          同源与跨域 源 window.orgin 或者 location.origin 可以得到当前源 源 &#x3D; 协议 + 域名 + 端口   同源 协议相同 域名相同 端口号相同   同源限制 无法读取非同源网页的 Cookie、LocalStorage 和 IndexedDB。 无法接触非同源网页的 DOM。 无法向非同源地址发送 AJAX 请求（可以发送，但浏览器会拒绝接受响应）。   跨域
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-11-27 00:00" pubdate>
-              2021-11-27
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Ajax/">Ajax</a>
-            
               <a href="/tags/JavaScript/">JavaScript</a>
-            
-              <a href="/tags/http/">http</a>
             
           </div>
         
